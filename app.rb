@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 require './config/environments'
+require './models/playlist.rb'
 
 get '/' do
   "foo"
