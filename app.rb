@@ -7,4 +7,9 @@ get '/' do
 end
 
 get '/new' do
+  erb :new
+end
+
+post '/new' do
+
 end
