@@ -4,7 +4,7 @@ require './config/environments'
 require './models/playlist.rb'
 
 get '/' do
-  "foo"
+  redirect '/new'
 end
 
 get '/new' do
