@@ -21,7 +21,7 @@ post '/new' do
   users = params[:user_data]
   url_id = SecureRandom.hex(3)
 
-  playlist = Playlist.new(name: name, users: users, url_id: url_id)
+  playlist = Playlist.new(name: name, url_id: url_id)
   counter = 10
   if playlist.save
     redirect "/#{url_id}"
