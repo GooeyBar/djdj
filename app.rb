@@ -17,8 +17,8 @@ get '/:playlist_id' do
 end
 
 post '/new' do
-  name = params[:playlist_name]
-  users = params[:user_data]
+  name = params[:playlistName]
+  users = params[:userData]
   puts request.body.read
   url_id = SecureRandom.hex(3)
 
