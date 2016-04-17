@@ -125,7 +125,7 @@ function postPlaylist() {
   obj.playlistName = name;
   obj.userData = userObj;
   
-  var data = { "ownerId": credentials.user_id, "playlistName": name, "userData", userObj };
+  var data = { "ownerId": credentials.user_id, "playlistName": name, "userData": userObj };
   
   console.log(data);
   
