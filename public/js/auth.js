@@ -179,7 +179,6 @@ function createPlaylistLink(text) {
 	
 }
 
-
 function initApp() {
     $(".intro-form").hide();
     $(".results").hide();
