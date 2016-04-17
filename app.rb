@@ -20,6 +20,7 @@ post '/new' do
   owner = params[:owner]
   name = params[:name]
   users = JSON.parse(request.body.read)
+  puts "???     " + users
   url_id = SecureRandom.hex(3)
 
   playlist = Playlist.new(owner: owner, name: name, url_id: url_id, users: users)
