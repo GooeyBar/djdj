@@ -82,7 +82,7 @@ function getSpotify(url, callback, isAsync) {
 
 function getMetrics(url, callback, songJson){
     var items = songJson.items;
-    for(int i = 0; i < items.size; i++){
+    for(int i = 0; i < items.length; i++){
         var songurl = url + encodeURIComponent(items[i].id);
         getSpotify(url, callback, false);
     }
