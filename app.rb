@@ -17,11 +17,11 @@ get '/:playlist_id' do
 end
 
 post '/new' do
-  users = JSON.parse(request.body.read)
-  puts users
+  name = params[:playlist_name]
+  users = params[:user_data]
   url_id = SecureRandom.hex(3)
 
-  playlist = Playlist.new(users)
+  playlist = Playlist.new(name: name, users: users, url_id: url_id)
   counter = 10
   if playlist.save
     redirect "/#{url_id}"
