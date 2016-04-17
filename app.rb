@@ -13,7 +13,7 @@ end
 
 get '/:playlist_id' do
   playlist = Playlist.find_by(url_id: params[:playlist_id])
-  "#{playlist.name} : #{playlist.owner} : #{playlist.url_id} : #{playlist.users}"
+  "Playlist! #{params[:playlist_id]}"
 end
 
 post '/new' do
