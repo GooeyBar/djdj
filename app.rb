@@ -13,21 +13,22 @@ end
 
 get '/:playlist_id' do
   playlist = Playlist.find_by(url_id: params[:playlist_id])
-  "#{playlist.name} : #{playlist.owner} : #{playlist.url_id}"
+  "Playlist! #{params[:playlist_id]}"
 end
 
 post '/new' do
-  owner = params[:owner]
-  name = params[:name]
+  name = params[:playlist_name]
+  users = params[:user_data]
   url_id = SecureRandom.hex(3)
 
-  playlist = Playlist.new(owner: owner, name: name, url_id: url_id)
-
+  playlist = Playlist.new(name: name, users: users, url_id: url_id)
+  counter = 10
   if playlist.save
     redirect "/#{url_id}"
   else
-    until playlist.save
+    until playlist.save || counter <= 0 do
       playlist.url_id = SecureRandom.hex(3)
+      counter -= 1
     end
     redirect "/#{url_id}"
   end
