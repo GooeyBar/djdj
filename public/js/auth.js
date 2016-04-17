@@ -85,7 +85,7 @@ function getSpotify(url, callback, isAsync) {
 
 function getMetrics(url, callback, songJson){
 	console.log(songJson);
-	var song = JSON.parse(songJson);
+	var song = songJson;
     var items = song.items;
 	console.log(items);
 	var i;
