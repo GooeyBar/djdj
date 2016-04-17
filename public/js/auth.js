@@ -58,11 +58,10 @@ function postSpotify(url, json, callback) {
     });
 }
 
-function getSpotify(url, callback, data) {
-	console.log("yah boo bay"+credentials.token);
+function getSpotify(url, callback, isAsync) {
 	$.ajax(url, {
         type: "GET",
-        data: data,
+        async: isAsync,
         headers: {
             'Authorization': 'Bearer ' + credentials.token,
         },
@@ -80,22 +79,13 @@ function getSpotify(url, callback, data) {
             }
         }
     });
-    /*var xmlhttp = new XMLHttpRequest();
-	
-	xmlhttp.open("GET", url, true);
-	
-	xmlhttp.setRequestHeader("Authorization", "Bearer " + credentials.token);
-	
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-			console.log(xmlhttp.responseText);
-			callback(xmlhttp.readyState, xmlhttp.responseText);
-		} else {
-			callback(xmlhttp.readyState, null);
-		}
-	};
-	
-	xmlhttp.send();*/
+
+function getMetrics(url, callback, songJson){
+    var items = songJson.items;
+    for(int i = 0; i < items.size; i+++){
+        var songurl = url + encodeURIComponent(items[i].id);
+        getSpotify(url, callback, false);
+    }
 }
 
 function go() {
@@ -120,27 +110,36 @@ function createPlaylistLink(text) {
 	
 	//https://api.spotify.com/v1/me/top/{type}
 	var url = "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term";
-	
+	var songJson;
 	getSpotify(url, function(ok, data) {
 		if (ok) {
-			console.log(data);
+			songJson = data;
 		} else {
 			error("Didn't work");
 		}
-	});
-	
-	url = "https://api.spotify.com/v1/users/dtsioni/top/tracks?limit=50&time_range=medium_term";
-	
-	getSpotify(url, function(ok, data) {
-		if (ok) {
-			console.log(data);
-		} else {
-			error("Didn't work");
-		}
-	});
-	
-	
-	
+	}, false);
+
+    var songs = new Array();
+    var url = "https://api.spotify.com/v1/audio-features/";
+    getMetrics(url, function(ok, data){
+        if(ok){
+            delete data["key"];
+            delete data["loudness"];
+            delete data["mode"];
+            delete data["tempo"];
+            delete data["type"];
+            delete data["uri"];
+            delete data["track_href"];
+            delete data["analysis_url"];
+            delete data["duration_ms"];
+            delete data["time_signature"];
+            songs.push(data);
+        } else {
+            console.log("data metrics error");
+        }
+    }, JSON.parse(songJson));
+    var userObj = {userid: credentials.userid, songs: songs};
+    console.log(userObj);
 	
 }
 
