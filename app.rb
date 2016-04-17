@@ -17,11 +17,11 @@ get '/:playlist_id' do
 end
 
 post '/new' do
-  print params[:playlist_name]
-  print params[:playlistName]
-  print params[:user_data]
-  print params[:userData]
-  print params[:ownerId]
+  puts params[:playlist_name]
+  puts params[:playlistName]
+  puts params[:user_data]
+  puts params[:userData]
+  puts params[:ownerId]
   name = params[:playlist_name]
   users = params[:user_data]
   puts request.body.read
