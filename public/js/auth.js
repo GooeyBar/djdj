@@ -131,7 +131,8 @@ function postPlaylist() {
   $.ajax({
       type: "POST",
       url: "/new",       
-      data: data
+      data: data,
+	  headers: { 'Content-Type': 'application/json' }
   }).done(function(){
       alert (data);    
   });
