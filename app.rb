@@ -23,5 +23,13 @@ post '/new' do
 
   playlist = Playlist.new(users)
   counter = 10
-  playlist.save
+  if playlist.save
+    redirect "/#{url_id}"
+  else
+    until playlist.save || counter <= 0 do
+      playlist.url_id = SecureRandom.hex(3)
+      counter -= 1
+    end
+    redirect "/#{url_id}"
+  end
 end
