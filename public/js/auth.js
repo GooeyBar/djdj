@@ -125,7 +125,7 @@ function postPlaylist() {
   obj.playlistName = name;
   obj.userData = userObj;
   
-  var data = JSON.stringify(obj);
+  var data = { "ownerId": credentials.user_id, "playlistName": name, "userData", userObj };
   
   console.log(data);
   
@@ -150,6 +150,8 @@ function createPlaylistLink(text) {
 	getSpotify(url, function(ok, data) {
 		if (ok) {
 			songJson = data;
+			console.log("get top song!");
+			console.log(songJson);
 		} else {
 			error("Didn't work");
 		}
@@ -170,11 +172,12 @@ function createPlaylistLink(text) {
             delete data["duration_ms"];
             delete data["time_signature"];
             songs.push(data);
+			console.log(songs);
         } else {
             console.log("data metrics error");
         }
     }, JSON.parse(songJson));
-    userObj = {userId: credentials.user_id, songs: songs};
+    userObj = {"userId": credentials.user_id, "songs": songs};
     console.log(userObj);
 	
 }
