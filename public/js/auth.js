@@ -122,7 +122,7 @@ function postPlaylist() {
   
   //form.submit();
   
-  var name = $("#playlist-terms")[0].innerHTML;
+  var name = $("#playlist-terms").val();
   
   var data = { "ownerId": credentials.user_id, "playlistName": name, "userData": userObj };
   
