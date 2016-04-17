@@ -120,15 +120,22 @@ function postPlaylist() {
   
   var name = $("#playlist-terms").value;
   
-  var data = {ownerID: credentials.user_id, playlistName: name, userData: userObj};
+  var obj = new Object();
+  obj.ownerId = credentials.user_id;
+  obj.playlistName = name;
+  obj.userData = userObj;
   
-  $.ajax({
+  var data = JSON.stringify(obj);
+  
+  console.log(data);
+  
+  /*$.ajax({
       type: "POST",
       url: "/new",       
       data: data
   }).done(function(){
       alert (data);    
-  });
+  });*/
 }
 
 function createPlaylistLink(text) {
@@ -167,7 +174,7 @@ function createPlaylistLink(text) {
             console.log("data metrics error");
         }
     }, JSON.parse(songJson));
-    userObj = {userid: credentials.user_id, songs: songs};
+    userObj = {userId: credentials.user_id, songs: songs};
     console.log(userObj);
 	
 }
