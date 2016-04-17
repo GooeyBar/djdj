@@ -84,10 +84,14 @@ function getSpotify(url, callback, isAsync) {
 }
 
 function getMetrics(url, callback, songJson){
-    var items = songJson.items;
+	console.log(songJson);
+	var song = JSON.parse(songJson);
+    var items = song.items;
+	console.log(items);
 	var i;
     for(i = 0; i < items.length; i++){
         var songurl = url + encodeURIComponent(items[i].id);
+		console.log(songurl);
         getSpotify(url, callback, false);
     }
 }
@@ -176,7 +180,7 @@ function createPlaylistLink(text) {
         } else {
             console.log("data metrics error");
         }
-    }, JSON.parse(songJson));
+    }, songJson);
     userObj = {"userId": credentials.user_id, "songs": songs};
     console.log(userObj);
 	
