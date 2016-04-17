@@ -30,7 +30,7 @@ post '/new' do
   else
     until playlist.save || counter <= 0 do
       playlist.url_id = SecureRandom.hex(3)
-      counter--
+      counter -= 1
     end
     redirect "/#{url_id}"
   end
