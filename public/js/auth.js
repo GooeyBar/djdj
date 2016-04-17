@@ -128,13 +128,13 @@ function postPlaylist() {
   
   console.log(data);
   
-  /*$.ajax({
+  $.ajax({
       type: "POST",
       url: "/new",       
       data: data
   }).done(function(){
       alert (data);    
-  });*/
+  });
 }
 
 function createPlaylistLink(text) {
