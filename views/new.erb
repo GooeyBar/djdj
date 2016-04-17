@@ -26,9 +26,13 @@
 	</div>
     <div id="search-form" class="intro-form row">
       <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6">
-	    <input type="text" class="form-control input-lg" id="playlist-terms" placeholder="tommyboi1337, hackerz13, mustardKing" value="">
-	    <br>
-	    <button class="btn btn-primary btn-lg" id='go' role="button">Create Playlist</button>
+	    <form id="new-playlist" action="/new/" method="post">
+	      <!-- <input type="text" class="form-control input-lg" id="playlist-terms" placeholder="tommyboi1337, hackerz13, mustardKing" value=""> -->
+		  <input type="text" name="playlist_name" class="form-control input-lg" id="playlist-terms" placeholder="Playlist Name">
+	      <br>
+		  <input id="userInput" type="hidden" name="user_data" />
+	      <button class="btn btn-primary btn-lg" id='go' role="button">Create Playlist</button>
+		</form>
       </div>
     </div>
   </div>

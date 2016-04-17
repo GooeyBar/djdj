@@ -15,6 +15,8 @@ var allPlaylists = [];
 var topTracks = null;
 var allTracks = {};
 
+var userObj = null;
+
 function error(s) {
     info(s);
 }
@@ -82,7 +84,8 @@ function getSpotify(url, callback, isAsync) {
 
 function getMetrics(url, callback, songJson){
     var items = songJson.items;
-    for(int i = 0; i < items.length; i++){
+	var i;
+    for(i = 0; i < items.length; i++){
         var songurl = url + encodeURIComponent(items[i].id);
         getSpotify(url, callback, false);
     }
@@ -97,17 +100,30 @@ function go() {
         $(".results").hide();
         $("#playlist-link").show();
         createPlaylistLink(text);
+		
+		postPlaylist();
     } else {
-        info("Enter some users first");
+        info("Enter a playlist title first");
     }
+}
+
+function postPlaylist() {
+  var form, newUserInput;
+  
+  form = $("#new-playlist");
+  
+  newUserInput = $("#userInput");
+  newUserInput.value = userObj;
+  
+  form.submit();
 }
 
 function createPlaylistLink(text) {
 	// parse text into list of user names
-	var users = text.split(",");
-	users = users.map(Function.prototype.call, String.prototype.trim);
-	console.log(users);
-	
+	//var users = text.split(",");
+	//users = users.map(Function.prototype.call, String.prototype.trim);
+	//console.log(users);
+	var playlistTitle= text.trim();
 	//https://api.spotify.com/v1/me/top/{type}
 	var url = "https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=medium_term";
 	var songJson;
@@ -138,7 +154,7 @@ function createPlaylistLink(text) {
             console.log("data metrics error");
         }
     }, JSON.parse(songJson));
-    var userObj = {userid: credentials.userid, songs: songs};
+    userObj = {userid: credentials.userid, songs: songs};
     console.log(userObj);
 	
 }
