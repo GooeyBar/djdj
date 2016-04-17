@@ -19,7 +19,7 @@ end
 post '/new' do
   name = params[:playlist_name]
   users = params[:user_data]
-  puts JSON.parse(request.body.read)
+  puts request.body.read
   url_id = SecureRandom.hex(3)
 
   playlist = Playlist.new(name: name, url_id: url_id, users: users)
