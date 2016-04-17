@@ -92,6 +92,7 @@ function getMetrics(url, callback, songJson){
     }
 }
 
+// call playlist-make stuff
 function go() {
     $("#top").hide(200);
     var text = $("#playlist-terms").val()
@@ -109,26 +110,14 @@ function go() {
 }
 
 function postPlaylist() {
-  //var form, newUserInput;
+  var form, newUserInput;
   
-  //form = $("#new-playlist");
+  form = $("#new-playlist");
   
-  //newUserInput = $("#userInput");
-  //newUserInput.value = userObj;
+  newUserInput = $("#userInput");
+  newUserInput.value = userObj;
   
-  //form.submit();
-  
-  var name = $("#playlist-terms").value;
-  
-  var data = {ownerID: credentials.user_id, playlistName: name, userData: userObj};
-  
-  $.ajax({
-      type: "POST",
-      url: "/new",       
-      data: data
-  }).done(function(){
-      alert (data);    
-  });
+  form.submit();
 }
 
 function createPlaylistLink(text) {
@@ -167,7 +156,7 @@ function createPlaylistLink(text) {
             console.log("data metrics error");
         }
     }, JSON.parse(songJson));
-    userObj = {userid: credentials.user_id, songs: songs};
+    userObj = {userid: credentials.userid, songs: songs};
     console.log(userObj);
 	
 }
@@ -211,7 +200,7 @@ function initApp() {
 
 function loginWithSpotify() {
     var client_id = '67b42727bf66410aace5a6becef09d63';
-    var redirect_uri = 'https://djdj.herokuapp.com/new';
+    var redirect_uri = window.location.href;
     var scopes = 'playlist-modify-public user-top-read';
 
     //if (document.location.hostname == 'localhost') {
@@ -224,6 +213,7 @@ function loginWithSpotify() {
         '&redirect_uri=' + encodeURIComponent(redirect_uri);
     document.location = url;
 }
+
 
 function getTime() {
     return Math.round(new Date().getTime() / 1000);
