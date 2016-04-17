@@ -81,6 +81,7 @@ function getSpotify(url, callback, isAsync) {
             }
         }
     });
+}
 
 function getMetrics(url, callback, songJson){
     var items = songJson.items;
